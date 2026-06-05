@@ -1,0 +1,16 @@
+# Data Protection Layer - NEVER commit direct sensor records or multi-gigabyte matrices
+data/raw/
+data/processed/
+data/shapefiles/*.zip
+data/shapefiles/*.shp
+data/shapefiles/*.dbf
+
+# Runtime Artifacts & System Overheads
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Local IDE Cache Profiles
+.vscode/
+.DS_Store

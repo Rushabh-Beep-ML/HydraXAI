@@ -1,3 +1,10 @@
 Paper Title,Year,Authors,Core Mountain Basin,Remote Sensing Source,ML Model Used,XAI Method,Key Findings,Limitations,Research Gap,HydraXAI Relevance Score
 Flash Flood Susceptibility Modelling Using Machine Learning Ensembles in Fragile Mountain Watersheds,2024,Zhang et al.,Alpine Basins,DEM / IMD / TWI,XGBoost,Built-in Feature Importance,XGBoost outscored single decision trees with a high ROC-AUC of 0.89 over rugged channels,Random validation splitting caused spatial autocorrelation leakage and model skipped frozen water layers completely,Omitted high-altitude cryospheric indicators and spatial block-validation constraints,9.0
 Axiomatic Feature Attribution via Shapley Additive Explanations for Satellite-Derived Flood Risk Hazards,2024,Muller et al.,Mountain Catchments,Satellite Precipitation / DEM / TWI,XGBoost,TreeSHAP,SHAP metrics isolated local non-linear risk triggers far more consistently than traditional continuous terrain scores,Features evaluated over coarse statically aggregated time frames which washed out short-duration daily triggers,Omitted daily temporal scale changes and dynamic thermal snowpack-melting vectors,9.5
+
+
+
+
+
+
+Characterizing Orographic Forcing and Cloudbursts,2025,Kumar et al.,Himalayan River Basins,IMD/NASA SRTM/METEOSAT,LightGBM,None,LightGBM mapped convective runoff with 0.87 precision by using aspect variables,Omitted cryospheric thermal shock dynamics and local post-hoc explanations,Isolated atmospheric parameters from changing snow cover variables and lacked XAI support,9.2
