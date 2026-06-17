@@ -24,3 +24,77 @@
 * **Limitations:** Failed to account for localized cryospheric melt interaction during sudden warm-source rainstorms. Lacked post-hoc XAI explanations for tracking district-level anomalies.
 * **Research Ideas:** Program an advanced feature layer inside HydraXAI that stacks NASA MODIS snow cover anomalies on top of LightGBM array predictions, then map local risk pathways using daily TreeSHAP values.
 * **HydraXAI Relevance:** 9.2/10. Confirms our advanced ensemble selections and terrain features while providing a clear physical validation step for our research portfolio.
+
+---
+### Journal Entry: 2026-06-17 | Log 004
+* **Paper Title:** Multivariant Feature Fusion & Tree Ensemble Baseline Setup (HydraXAI Core Methodology Log)
+* **Key Findings:** Resolved spatial resolution discrepancies between NASA SRTM topography (30m), MODIS cryosphere (500m), and IMD precipitation grids (25km) by engineering a custom 2D coordinate-stitching loop. Successfully integrated a cloudburst precipitation surge vector into a regularized LightGBM classifier setup.
+* **Limitations:** Initial input datasets are vulnerable to high spatial autocorrelation across localized alpine catchment zones if standard random train-test splitting protocols are applied.
+* **Research Ideas:** Reshape the uniform grid mesh $G$ ($100 \times 120$ pixels) into discrete structural continuous spatial feature vectors $V_{\text{feature}} = \text{vec}(\text{Matrix}_{\text{feature}}) \in \mathbb{R}^{M \times N}$. Programmatically drop elements where satellite cloud obscuration flags trigger $\text{NaN}$ values to match our strict MODIS bitwise mask layer.
+
+* **HydraXAI Parameters Registered:** * Objective: `binary_logloss`
+  * Max Depth: `6` (regularization restriction to prevent overfitting on local topography)
+  * Feature Fraction: `0.8` (stochastic subsetting per tree split)
+  * Target Data Dimensions: `11,400 active row observations` with a uniform 1:1 hazard balance class distribution.
+=============================================================================
+
+1. CRITICAL CONTEXT & IMPLEMENTATION OBJECTIVE
+Prior standalone ingest blocks successfully isolated independent data matrices:
+NASA SRTM terrain grids (30m elevation scales), NASA MODIS daily cryospheric 
+channel footprints (500m FSC rasters), and India Meteorological Department 
+(IMD) downscaled weather blocks (0.05° resolution). 
+
+The core research bottleneck addressed in this log is Spatial Resolution 
+Harmonization and Tabular Feature Assembly. Machine learning architectures 
+cannot process disconnected spatial layers of differing cell volumes natively. 
+Log 004 documents the design and execution of a non-black-box Feature Fusion 
+Matrix Layer that flattens multi-source arrays, eliminates atmospheric cloud 
+anomalies programmatically, and initializes a regularized baseline Tree Ensemble.
+
+2. METHODOLOGICAL & MATHEMATICAL BLUEPRINT
+
+A. Structural Matrix Stacking
+Let the structural grid domain be configured as a uniform mesh G of size M x N 
+(where M = 100 rows, N = 120 columns). Separate dynamic variables are mapped 
+spatially to coordinate frames (x, y). The matrix transformation reshapes 
+each two-dimensional geospatial layer into a continuous one-dimensional 
+structural feature vector:
+V_feature = vec(Matrix_feature) ∈ R^(M×N)
+
+B. Cloud-Obscuration Filtering (NaN Extraction)
+To preserve parity with our MODIS bitwise shift masking routine, row-wise indices 
+containing missing values are completely dropped from the training set. If a 
+pixel experiences cloud-cover blocking such that FSC(x, y) = NaN, the entire vector 
+slice is pruned:
+Dataset_Clean = { V_i ∈ G | ∄ feature_val = NaN }
+
+C. Non-Linear Target Risk Proxy Synthesis
+To establish an operational baseline for tree classification before moving to 
+historical downstream events, a target flood hazard proxy is formulated 
+using local geomorphological and atmospheric weights:
+Risk_Score = (Precip * 0.5) + (sin(Slope) * 25.0) + (TWI * 2.0) - (FSC * 15.0)
+Hazard_Label = 1 if Risk_Score > median(Risk_Score) else 0
+
+3. CODEBASE VERIFICATION METRICS
+The data fusion loop and model architecture script (train_model.py) were executed 
+successfully in a local PowerShell environment, yielding the following telemetry:
+ -> Mesh Layout Scale      : 100 x 120 Grid Matrix
+ -> Total Mapped Nodes     : 12,000 spatial pixels
+ -> Cloud Pruned Elements  : 600 vector elements dropped (Parity check: PASSED)
+ -> ML-Ready Dataset Rows  : 11,400 active row observations
+ -> Classification Splay   : Balanced distribution (5,700 high-risk / 5,700 low-risk)
+
+4. MACHINE LEARNING ENGINE ARCHITECTURE
+To minimize spatial autocorrelation errors common in geography data, LightGBM is 
+selected with heavy structural regularization constraints:
+ -> Objective Mode         : Binary Classification (binary_logloss)
+ -> Max Tree Depth Limit   : 6 (To avoid deep, overfitted leaf nodes)
+ -> Num Leaves Limit       : 31
+ -> Feature Fraction Limit : 0.8 (Randomly samples 80% of inputs per split iteration)
+ -> Bagging Frequency      : 5 rounds with a 0.9 row-selection coefficient
+
+5. NEXT RESEARCH VECTOR
+With the data data fusion layers locked and the tree framework initialized, 
+Phase 4 moves to implementing Spatial Cross-Validation splits (e.g., Block K-Fold) 
+to evaluate model performance without data leakage across geographical regions.
+=============================================================================
