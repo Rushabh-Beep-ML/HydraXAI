@@ -1,6 +1,6 @@
 # HydraXAI: Chronological Research Engineering Journal
 
-### Journal Entry: 2026-06-04 | Log 001
+### Journal Entry: 2026-06-02 | Log 001
 * **Paper Title:** Extreme Flood Hazard Mapping in Alpine Catchments Using Advanced Ensemble Methods (Zhang et al., 2024)
 * **Key Findings:** Confirmed that $XGBoost$ spatial architectures yield optimal macro-level classification metrics for flash flood boundaries, but are highly sensitive to spatial autocorrelation data leaks.
 * **Limitations:** Suffered from localized over-fitting along extreme high-relief elevation slopes due to a lack of terrain-explicit validation.
@@ -9,7 +9,7 @@
 
 ---
 
-### Journal Entry: 2026-06-05 | Log 002
+### Journal Entry: 2026-06-04 | Log 002
 * **Paper Title:** Game-Theoretic Post-Hoc Interpretability for Hydro-Meteorological Hazard Models (Muller et al., 2024)
 * **Key Findings:** Proved that $TreeSHAP$ values solve the multi-collinearity problem in climate variables, reliably separating rainfall impacts from soil moisture variables.
 * **Limitations:** The computation footprint scales exponentially with deep feature sets, creating processing bottlenecks on massive planetary arrays.
