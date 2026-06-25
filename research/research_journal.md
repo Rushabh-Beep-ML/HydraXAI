@@ -33,7 +33,7 @@
 * **Research Ideas:** Reshape the uniform grid mesh $G$ ($100 \times 120$ pixels) into discrete structural continuous spatial feature vectors $V_{\text{feature}} = \text{vec}(\text{Matrix}_{\text{feature}}) \in \mathbb{R}^{M \times N}$. Programmatically drop elements where satellite cloud obscuration flags trigger $\text{NaN}$ values to match our strict MODIS bitwise mask layer.
 
 ---
-### Journal Entry: 2026-06-21 | Log 005
+### Journal Entry: 2026-06-20 | Log 005
 * **Phase 4 Milestone:** Spatial Autocorrelation Mitigation via Block K-Fold Engine
 * **Objective:** Address the critical spatial leakage vulnerability identified in Log 001, where standard random splitting causes models to artificially memorize adjacent geographic pixels (Tobler's First Law of Geography).
 * **Methodological Implementation:** * Engineered a custom `SpatialBlockSplitter` (`experiments/src/spatial_validation.py`).
