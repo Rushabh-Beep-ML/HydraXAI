@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "HydraXAI"
+version: "0.1.1"
+type: software
+license: "MIT"
+
+message: "If you use HydraXAI in your research, please cite it as software."
+
+authors:
+  - family-names: "Ahire"
+    given-names: "Rushabh"
+
+keywords:
+  - artificial intelligence
+  - machine learning
+  - explainable AI
+  - geospatial analysis
+  - environmental intelligence
+
+abstract: "HydraXAI is a research-oriented intelligence framework for data-driven environmental and geospatial analysis using machine learning, explainable AI, and structured experimental workflows."
+
+repository-code: "https://github.com/Rushabh-Beep-ML/HydraXAI"
