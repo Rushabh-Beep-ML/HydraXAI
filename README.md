@@ -1,6 +1,12 @@
 # HydraXAI: Explainable Climate-Aware Flood Risk Intelligence
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22982296.svg)](https://doi.org/10.5281/zenodo.22982296)
+
 HydraXAI is a research-grade intelligence framework designed to provide explainable flood risk assessments for the Western Ghats region. By integrating multi-source satellite data with game-theoretic interpretability models, HydraXAI moves beyond "black-box" predictions to offer actionable, physically grounded insights for disaster risk reduction.
+
+### Research Artifact
+
+**Zenodo DOI:** [10.5281/zenodo.22982296](https://doi.org/10.5281/zenodo.22982296)
 
 ## Research Methodology
 - **Data Ingestion:** Automated multi-source pipelines for MODIS, SRTM, and climate datasets.
